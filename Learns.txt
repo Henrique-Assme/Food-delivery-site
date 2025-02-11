@@ -1,0 +1,94 @@
+padding e margin 0 são usados para remover espaçamentos internos e margens aplicados aos elementos por padrão
+box-sizing border-box faz com que o tamanho total dos elementos inclua o padding e as bordas, facilitando o controle do layout, evite cálculos inesperados no tamanho dos elementos
+min-height 100vh define que o corpo da página sempre terá no mínimo 100% da altura da viewport, layout preenche tota a tela
+
+Estrutura de pastas:
+Components - guarda os componentes criados
+Pages - guarda as páginas criadas
+
+Importar estilo global: 
+pesquisar a font no google fonts -> get font -> get embed code -> @import e colar no index.css, depois só colocar font-family no *
+
+Rotas:
+No arquivo main.jsx encapsular o componente <App /> com o BrowserRouter do react-router-dom. No app.jsx colocar o componente Routes do react-router-dom e dentro dele cada componente 
+Route refere-se à uma rota. <Route path='cart' element={<Cart />} /> é a rota que vai para a página Cart.jsx
+
+Animações: animações com @keyframe criadas no index.css e colocadas nos .css com a propriedade animation
+
+Contexto:
+Serve para criar um context api para gerenciar e compartilhar estados globais entre componentes sem precisar passar cada prop nos componentes
+Criar uma pasta em src chamado context e criar o context. Cada context precisa ter um creatContext(null ou não para ter um valor inicial)
+Depois criar um context provider, que vai disponibilizar o contexto para todos os filhos do contexto (a aplicação toda)
+<StoreContextProvider>
+    <App /> app todo tem o contextValue à disposição
+</StoreContextProvider>
+Para fazer uso do contexto dentro de algum componente, basta utilizar o useContext(StoreContext) e o contexto criado como valor inicial
+
+Display grid:
+Permite organizar itens em forma de linhas e colunas. 
+grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) define quantas colunas o grid terá e como se ajustam no tamanho da tela.
+repeat(auto-fill) -> adiciona automaticamente o máximo de colunas sem quebrar a linha, minmax(240px, 1fr) cada coluna terá no mínimo
+240 px e no máximo 1fr (frame)
+
+Popup:
+No arquivo app.jsx colocar popus é basicamente colocar um z-index 1 no componente e renderizar ele acima do app, usar um estado para organizar se ele está visivel ou não
+
+Backend:
+npm init e instalar dependencias 
+express (js no back)
+mongoose (mongodb)
+jsonwebtoken (autenticação)
+bcrypt (criptografar dados dos usuários no db) 
+cors (dar permissão ao front para conectar no back) 
+dotenv (var de ambiente)
+body-parser (parse data vindo do usuário) 
+multer (criar imagens para o sistema) 
+stripe (payment gateway) 
+\validator (checar se senha é válida ou não) 
+nodemon (reestartar server ao salvar arquivo)
+
+Estrutura de pastas:
+config -> arquivos de configuração do banco de dados
+models -> modelos do mongo
+middleware -> middleware do servidor
+controllers -> lógica da aplicação
+routes -> rotas da api
+uploads -> imagens
+
+Servidor como módulo: colocar no arquivo package.json uma tag "type": "module"
+
+Middlewares:
+express.json() -> sempre que o servidor receber uma requisição, vai ser parseado como json
+cors() -> Cross-Origin Resource Sharing é um mecanismo de segurança do browser que usa cabeçalhos http para informar a um navegador que permita que um app web 
+seja executado em um domínio com permissão para acessar recursos de um servidor de um domínio diferente. Por exemplo, XMLHttpRequest e Fetch API seguem política 
+de mesma origen, ou seja, o app web que faz o uso dessas APIs só poderá fazer solicitações se estiver na mesma origem que o aplicativo foi carregado, a menos que 
+a resposta inclua o cabeçalho cors
+
+MondoDb:
+Mongo Atlas, criar novo database, selecioanr mongoose no cluster. Cluster são criados com 3 nodes para resiliência. 
+Adicionar o ip 0.0.0.0 permite ser acessado por qualquer ip
+Arquivo db.js na pasta config, mongoose.connect(copiar o texto do cluster fornecido trocando o ? pelo nome do projeto)
+
+MVC:
+Model possui o modelo do dado, nesse caso um objeto foodItem com seus campos
+Controller possui a lógica de CRUD de cada objeto, nesse caso tem só a controller do foodItem
+Dentro de rotas tem os enpoints para acessar o CRUD de foodItem
+Dentro de server.js tem um app.use("api/food", foodRouter), ou seja, tudo que cair nesse endereço vai ser tratado pelo foodRouter, que acessa o CRUD de food
+
+Admin:
+axios para fazer as requisições
+react-toastify para fazer as notificações
+react-router-dom para as rotas
+
+Autenticação:
+userController, userRoute e userModel no Backend
+Model precisa ter o minimize false se tiver um valor default vazio, do contrário, o mongoose não criar propriedades vazias
+
+Criptografia da senha:
+Tecnica de salt acresencenta caracteres aleatórios à senha, o que torna o hash de senhas iguais diferente
+
+Variáveis de ambiente:
+para usar variáveis de ambiente basta importat o 'dotenv/config' no server.js e usar nos arquivos com process.env.JWT_SECRET (nome da var)
+
+Pagamento:
+secret key no site do stripe como variável de ambiente
