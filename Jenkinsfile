@@ -4,6 +4,7 @@ pipeline {
     environment {
         NODEJS_HOME = tool 'NodeJS 23'
         PATH = "${NODEJS_HOME}/bin:${env.PATH}"
+        STRIPE_SECRET_KEY = credentials('STRIPE_SECRET_KEY')
     }
 
     stages {
