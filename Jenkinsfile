@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                git brach: 'main', url: 'https://github.com/Henrique-Assme/Food-delivery-site'
+                git branch: 'main', url: 'https://github.com/Henrique-Assme/Food-delivery-site'
             }
         }
 
