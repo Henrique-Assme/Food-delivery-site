@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        NODEJS_VERSION = '23.7.0'
+        NODEJS_HOME = tool '23'
+        PATH = "${NODEJS_HOME}/bin:${env.PATH}"
     }
 
     stages {
@@ -14,8 +15,6 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                def nodejs = tool name: 'NodeJs', type: 'jenkins.plugin.nodejs.tools.NodeJSInstallation'
-                env.PATH = "${nodejs}/bin:${env.PATH}"
                 sh 'npm install'
             }
         }
