@@ -118,7 +118,7 @@ describe("Tests - User Controller - Register", () => {
 
 describe("Teste da pipeline", () => {
     test("Teste qualquer para testar se a pipeline roda", () => {
-        const data = 2 + 2
+        const data = 3 + 3
         expect(data).toBe(4)
     })
 })
