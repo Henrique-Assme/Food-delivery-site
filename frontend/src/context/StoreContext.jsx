@@ -1,8 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const StoreContext = createContext(null);
-export {StoreContext}
+export { StoreContext };
 
 const StoreContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
@@ -16,31 +17,32 @@ const StoreContextProvider = (props) => {
     };
 
     const loadCart = async (token) => {
-        const response = await axios.get(
-            url + "/api/cart/list",
-            { headers: { token: token } }
-        );
+        const response = await axios.get(url + "/api/cart", {
+            headers: { token: token },
+        });
         setCartItems(response.data.cartData);
     };
 
     const addToCart = async (itemId) => {
-        if (!cartItems[itemId]) {
-            setCartItems((prev) => ({
-                ...prev,
-                [itemId]: 1,
-            }));
-        } else {
-            setCartItems((prev) => ({
-                ...prev,
-                [itemId]: prev[itemId] + 1,
-            }));
-        }
         if (token) {
-            await axios.post(
+            if (!cartItems[itemId]) {
+                setCartItems((prev) => ({
+                    ...prev,
+                    [itemId]: 1,
+                }));
+            } else {
+                setCartItems((prev) => ({
+                    ...prev,
+                    [itemId]: prev[itemId] + 1,
+                }));
+            }
+            await axios.patch(
                 url + "/api/cart/add",
                 { itemId },
                 { headers: { token } }
             );
+        } else {
+            toast.error("You should login first");
         }
     };
 
@@ -57,7 +59,7 @@ const StoreContextProvider = (props) => {
             return updatedCart;
         });
         if (token) {
-            await axios.post(
+            await axios.patch(
                 url + "/api/cart/remove",
                 { itemId },
                 { headers: { token } }
