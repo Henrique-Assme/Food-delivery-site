@@ -114,3 +114,11 @@ describe("Tests - User Controller - Register", () => {
         await userModel.findOneAndDelete({ name: "test"})
     })
 })
+
+
+describe("Teste da pipeline", () => {
+    test("Teste qualquer para testar se a pipeline roda", () => {
+        const data = 2 + 2
+        expect(data).toBe(4)
+    })
+})
