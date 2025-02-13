@@ -30,10 +30,6 @@ pipeline {
     }
 
     post {
-        always {
-            
-        }
-
         failure {
             mail to: 'heniassme@gmail.com',
                 subject: "Falha no build: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
