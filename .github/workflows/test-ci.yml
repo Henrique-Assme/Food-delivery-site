@@ -1,0 +1,26 @@
+name: CI - Test API Node.js
+
+on:
+  push:
+    branches: [master, develop]
+  pull_request:
+    branches: [master, develop]
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout do cógido
+              uses: actions/checkout@v3
+
+            - name: Instalar Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: 23.7.0
+            
+            - name: Istalar dependências
+              uses: npm install
+
+            - name: Rodar testes
+              uses: npm test

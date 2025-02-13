@@ -92,3 +92,7 @@ para usar variáveis de ambiente basta importat o 'dotenv/config' no server.js e
 
 Pagamento:
 secret key no site do stripe como variável de ambiente
+
+Testes:
+jest e supertest
+mongodb-memory-server
