@@ -96,3 +96,6 @@ secret key no site do stripe como variável de ambiente
 Testes:
 jest e supertest
 mongodb-memory-server
+
+Automatização de testes:
+jenkins, tunelamento de localhost para cloudflare
