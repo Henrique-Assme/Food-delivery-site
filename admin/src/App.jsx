@@ -7,9 +7,12 @@ import Orders from "./pages/Orders/Orders";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 
-export const API_URL = "http://localhost:4000";
+export const App = () => {
+    const API_URL =
+        import.meta.env.NODE_ENV === "dev"
+            ? "http://localhost:4000"
+            : import.meta.env.VITE_API_RL;
 
-const App = () => {
     return (
         <div>
             <ToastContainer />
@@ -19,9 +22,12 @@ const App = () => {
                 <div className="app-content">
                     <Sidebar />
                     <Routes>
-                        <Route path="/add" element={<Add />} />
-                        <Route path="/list" element={<List />} />
-                        <Route path="/orders" element={<Orders url={API_URL}/>} />
+                        <Route path="/add" element={<Add url={API_URL} />} />
+                        <Route path="/list" element={<List url={API_URL} />} />
+                        <Route
+                            path="/orders"
+                            element={<Orders url={API_URL} />}
+                        />
                     </Routes>
                 </div>
             </div>
