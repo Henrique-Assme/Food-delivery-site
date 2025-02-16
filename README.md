@@ -73,6 +73,8 @@ Start the frontend:
 npm run dev
 ```
 
+To properly test Stripe payment page, use one card from their test card number page: [Test card numbers](https://docs.stripe.com/testing?locale=pt-BR#international-cards)
+
 # 🚀 Deployment and CI/CD
 **Backend (Render)**
 
