@@ -11,7 +11,7 @@ export const App = () => {
     const API_URL =
         import.meta.env.NODE_ENV === "dev"
             ? "http://localhost:4000"
-            : import.meta.env.VITE_API_RL;
+            : import.meta.env.VITE_API_URL;
 
     return (
         <div>
