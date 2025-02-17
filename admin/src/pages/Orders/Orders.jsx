@@ -24,6 +24,7 @@ const Orders = ({ url }) => {
             status: event.target.value,
         });
         if (response.status === 200) {
+            toast.success(response.data.message)
             await fetchOrders();
         }
     };

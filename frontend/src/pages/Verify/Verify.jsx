@@ -3,6 +3,7 @@ import "./Verify.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
+import { toast } from "react-toastify"
 
 const Verify = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -18,8 +19,10 @@ const Verify = () => {
                 orderId,
             });
             if (response.status === 200) {
+                toast.success(response.data.message)
                 navigate("/myorders");
             } else {
+                toast.error(response.data.message)
                 navigate("/");
             }
         };

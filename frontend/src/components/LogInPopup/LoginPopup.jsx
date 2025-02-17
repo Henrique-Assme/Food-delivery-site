@@ -3,6 +3,7 @@ import "./LoginPopup.css";
 import { assets } from "../../assets/frontend_assets/assets";
 import { StoreContext } from "../../context/StoreContext.jsx";
 import axios from "axios";
+import { toast } from "react-toastify"
 
 //eslint-disable-next-line
 const LoginPopup = ({ setShowLogin }) => {
@@ -15,6 +16,8 @@ const LoginPopup = ({ setShowLogin }) => {
         email: "",
         password: "",
     });
+
+    const valid_res_status = [200, 201]
 
     const onChangeHandler = (event) => {
         const name = event.target.name;
@@ -33,13 +36,14 @@ const LoginPopup = ({ setShowLogin }) => {
 
         const response = await axios.post(newURL, data);
 
-        if (response.data.success) {
+        if (response.status in valid_res_status) {
             setToken(response.data.token);
             localStorage.setItem("token", response.data.token);
             await loadCart(response.data.token);
             setShowLogin(false);
+            toast.success(response.data.message)
         } else {
-            alert(response.data.message);
+            toast.error(response.data.message)   
         }
     };
 

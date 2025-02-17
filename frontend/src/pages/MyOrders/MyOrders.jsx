@@ -3,6 +3,7 @@ import {StoreContext} from "../../context/StoreContext";
 import { assets } from "../../assets/frontend_assets/assets";
 import "./MyOrders.css";
 import axios from "axios";
+import { toast } from "react-toastify"
 
 const MyOrders = () => {
     const { url, token } = useContext(StoreContext);
@@ -14,6 +15,8 @@ const MyOrders = () => {
         });
         if (response.status === 200) {
             setData(response.data.data);
+        } else {
+            toast.error(response.data.message)
         }
     };
 
