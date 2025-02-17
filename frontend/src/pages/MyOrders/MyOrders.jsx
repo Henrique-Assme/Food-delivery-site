@@ -10,13 +10,15 @@ const MyOrders = () => {
     const [data, setData] = useState([]);
 
     const fetchOrders = async () => {
-        const response = await axios.get(url + "/api/order/userorders", {
-            headers: { token },
-        });
-        if (response.status === 200) {
-            setData(response.data.data);
-        } else {
-            toast.error(response.data.message)
+        try {
+            const response = await axios.get(url + "/api/order/userorders", {
+                headers: { token },
+            });
+            if (response.status === 200) {
+                setData(response.data.data);
+            }
+        } catch (error) {
+            toast.error(error.response.data.message)
         }
     };
 

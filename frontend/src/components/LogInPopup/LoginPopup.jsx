@@ -34,16 +34,19 @@ const LoginPopup = ({ setShowLogin }) => {
             newURL += "/register";
         }
 
-        const response = await axios.post(newURL, data);
+        try {
+            const response = await axios.post(newURL, data);
 
-        if (response.status in valid_res_status) {
-            setToken(response.data.token);
-            localStorage.setItem("token", response.data.token);
-            await loadCart(response.data.token);
-            setShowLogin(false);
-            toast.success(response.data.message)
-        } else {
-            toast.error(response.data.message)   
+            if (valid_res_status.indexOf(response.status) !== -1) {
+                setToken(response.data.token);
+                console.log("entrou1");
+                localStorage.setItem("token", response.data.token);
+                await loadCart(response.data.token);
+                setShowLogin(false);
+                toast.success(response.data.message)
+            }
+        } catch (error) {
+            toast.error(error.response.data.message)   
         }
     };
 

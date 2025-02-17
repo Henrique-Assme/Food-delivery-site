@@ -7,23 +7,29 @@ const List = ({ url }) => {
     const [list, setList] = useState([]);
 
     const fetchList = async () => {
-        const response = await axios.get(url + "/api/food/list");
-        if (response.data.success) {
-            setList(response.data.data);
-        } else {
-            toast.error("Error");
+        try {
+            const response = await axios.get(url + "/api/food/list");
+            if (response.data.success) {
+                setList(response.data.data);
+            }
+        } catch (error) {
+            toast.error(error.response.data.message);
         }
+        
+        
     };
 
     const removeFood = async (foodId) => {
-        const response = await axios.delete(url + "/api/food/remove", {
-            data: { id: foodId },
-        });
-        if (response.data.success) {
-            await fetchList();
-            toast.success(response.data.message);
-        } else {
-            toast.error("Error");
+        try {
+            const response = await axios.delete(url + "/api/food/remove", {
+                data: { id: foodId },
+            });
+            if (response.data.success) {
+                await fetchList();
+                toast.success(response.data.message);
+            }
+        } catch (error) {
+            toast.error(error.response.data.message);
         }
     };
 

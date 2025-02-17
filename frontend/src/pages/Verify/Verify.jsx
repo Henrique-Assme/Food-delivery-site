@@ -14,15 +14,17 @@ const Verify = () => {
 
     useEffect(() => {
         const verifyPayment = async () => {
-            const response = await axios.post(url + "/api/order/verify", {
-                success,
-                orderId,
-            });
-            if (response.status === 200) {
-                toast.success(response.data.message)
-                navigate("/myorders");
-            } else {
-                toast.error(response.data.message)
+            try {
+                const response = await axios.post(url + "/api/order/verify", {
+                    success,
+                    orderId,
+                });
+                if (response.status === 200) {
+                    toast.success(response.data.message)
+                    navigate("/myorders");
+                }
+            } catch (error) {
+                toast.error(error.response.data.message)
                 navigate("/");
             }
         };

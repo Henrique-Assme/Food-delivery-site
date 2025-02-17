@@ -10,22 +10,28 @@ const Orders = ({ url }) => {
     const [orders, setOrders] = useState([]);
 
     const fetchOrders = async () => {
-        const response = await axios.get(url + "/api/order/allorders");
-        if (response.status === 200) {
-            setOrders(response.data.data);
-        } else {
-            toast.error("Error getting all the orders");
+        try {
+            const response = await axios.get(url + "/api/order/allorders");
+            if (response.status === 200) {
+                setOrders(response.data.data);
+            }
+        } catch (error) {
+            toast.error(error.response.data.message);
         }
     };
 
     const statusHandler = async (orderId, event) => {
-        const response = await axios.put(url + "/api/order/status", {
-            orderId,
-            status: event.target.value,
-        });
-        if (response.status === 200) {
-            toast.success(response.data.message)
-            await fetchOrders();
+        try {
+            const response = await axios.put(url + "/api/order/status", {
+                orderId,
+                status: event.target.value,
+            });
+            if (response.status === 200) {
+                toast.success(response.data.message)
+                await fetchOrders();
+            }
+        } catch (error) {
+            toolbar.error(error.response.data.message)
         }
     };
 
