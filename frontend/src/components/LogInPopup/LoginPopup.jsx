@@ -84,7 +84,7 @@ const LoginPopup = ({ setShowLogin }) => {
                         onChange={onChangeHandler}
                         value={data.password}
                         type="password"
-                        placeholder="Passward"
+                        placeholder="Password"
                         required
                     />
                 </div>

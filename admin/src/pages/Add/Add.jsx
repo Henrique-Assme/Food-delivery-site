@@ -89,7 +89,7 @@ const Add = ({ url }) => {
                 </div>
                 <div className="add-category-price">
                     <div className="add-category flex-col">
-                        <p>Product caregory</p>
+                        <p>Product category</p>
                         <select
                             name="category"
                             onChange={onChangeHandler}
